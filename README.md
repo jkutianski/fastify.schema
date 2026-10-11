@@ -12,6 +12,40 @@ npm install fastify.schema fastify
 
 Install a validator separately, such as `npm install zod`.
 
+## Shared utilities and repository setup
+
+The route parser and matcher are maintained in the [`utils.schema` repository](https://github.com/jkutianski/utils.schema) and included here as the `src/utils.schema` Git submodule. The published `fastify.schema` package includes the required utility source; package consumers do not need to install or initialize the submodule separately.
+
+Clone this repository with its submodule:
+
+```sh
+git clone --recurse-submodules https://github.com/jkutianski/fastify.schema.git
+```
+
+If you already cloned the repository without submodules, initialize the pinned revision with either command:
+
+```sh
+git submodule update --init --recursive
+# or
+npm run submodule:init
+```
+
+To intentionally advance the submodule to the latest commit on its configured remote branch (`main`), run:
+
+```sh
+npm run submodule:update
+```
+
+Review and commit the updated gitlink in the parent repository so other clones use the same revision:
+
+```sh
+git status
+git add src/utils.schema
+git commit -m "Update utils.schema submodule"
+```
+
+CI initializes the revision pinned by the parent repository rather than tracking the latest remote commit. Before packing or publishing from a Git checkout, initialize the submodule and check the package contents with `npm pack --dry-run`.
+
 ## Usage
 
 ```js

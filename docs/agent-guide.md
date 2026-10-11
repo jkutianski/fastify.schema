@@ -78,6 +78,7 @@ Public declarations are in `src/index.d.ts`. The route map determines the parser
 
 - `src/index.js` — route matching and Fastify hook implementation
 - `src/index.d.ts` — public declarations and Fastify request augmentation
+- `src/utils.schema/` — shared route parsing and matching Git submodule
 - `test/index.test.js` — Jest tests with Fastify `inject()` and direct hook cases
 - `examples/zod.js` — runnable Zod example using `inject()`
 - `examples/json-schema.js` — runnable Ajv example
@@ -87,7 +88,21 @@ Public declarations are in `src/index.d.ts`. The route map determines the parser
 
 ## Development and validation
 
-The package uses ESM and Jest. Keep tests in Jest format, close Fastify instances after each test, and use `fastify.inject()` for HTTP-level behavior.
+The package uses ESM and Jest. The shared route utilities are a Git submodule at `src/utils.schema`; a regular clone pins a specific submodule commit and must initialize it before tests, examples, or packaging.
+
+```sh
+git clone --recurse-submodules https://github.com/jkutianski/fastify.schema.git
+# or, in an existing clone:
+git submodule update --init --recursive
+# equivalent package script:
+npm run submodule:init
+```
+
+Use `npm run submodule:update` only when intentionally upgrading the shared utilities to the latest commit on the configured `main` branch. Review and commit the changed `src/utils.schema` gitlink in the parent repository. CI uses `git submodule update --init --recursive` so it tests the exact revision pinned by the parent commit.
+
+The npm package includes `src`, including the initialized submodule contents. Consumers install `fastify.schema` normally and do not need Git or a separate `utils.schema` dependency. Initialize the submodule before creating a package tarball; `npm pack --dry-run` can be used to verify its contents.
+
+Keep tests in Jest format, close Fastify instances after each test, and use `fastify.inject()` for HTTP-level behavior.
 
 ```sh
 npm test
@@ -95,6 +110,7 @@ npm run test:coverage
 npm run test:types
 npm run example:zod
 npm run example:json-schema
+npm run submodule:init
 ```
 
 Coverage thresholds are configured in `package.json`. The npm package includes `src`, `examples`, `docs`, and `skills`.

@@ -80,6 +80,7 @@ Relevant files:
 
 - `src/index.js`: matcher, `preValidation` and `preSerialization` hooks
 - `src/index.d.ts`: route/parser types and `FastifyRequest` augmentation
+- `src/utils.schema/`: shared route parsing/matching Git submodule
 - `test/index.test.js`: Jest tests and Fastify `inject()` integration
 - `examples/`: Zod, Ajv, and TypeScript examples
 - `docs/agent-guide.md`: hook flow, encapsulation, and development notes
@@ -87,11 +88,16 @@ Relevant files:
 Validation:
 
 ```sh
+npm run submodule:init
 npm test
 npm run test:coverage
 npm run test:types
 npm run example:zod
 npm run example:json-schema
 ```
+
+The parent repository pins the submodule to a specific commit. Initialize that pinned revision after a normal clone with `npm run submodule:init` or `git submodule update --init --recursive`. Use `npm run submodule:update` only for an intentional upgrade to the configured remote branch; review and commit the resulting `src/utils.schema` gitlink. CI initializes the pinned revision, not the latest remote version.
+
+The published package includes the initialized submodule files under `src`; consumers do not install the submodule separately. Initialize it before packing or publishing, and verify the tarball with `npm pack --dry-run`.
 
 Keep the package ESM, preserve Fastify lifecycle and encapsulation behavior, close test instances, and add regression coverage for behavior changes. Jest coverage thresholds are 100% for statements, branches, functions, and lines.

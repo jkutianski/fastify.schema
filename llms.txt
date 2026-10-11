@@ -52,6 +52,10 @@ The parser context includes `phase` (`'urlParams'`, `'request'`, or `'response'`
 - [Tests](test/index.test.js) — Jest unit and Fastify integration tests.
 - [Package metadata](package.json) — exports, dependencies, scripts, and coverage thresholds.
 
+## Shared utilities submodule
+
+`src/utils.schema` is a Git submodule containing the shared route parser and matcher. Clone recursively or initialize an existing checkout with `git submodule update --init --recursive` / `npm run submodule:init`. `npm run submodule:update` intentionally advances it to the latest commit on the configured `main` branch; review and commit the updated gitlink in this repository. CI initializes the parent-pinned revision. The published package bundles the initialized utility source, so consumers do not install the submodule separately. Initialize it before running tests, examples, or `npm pack`.
+
 ## Validation
 
 ```sh
