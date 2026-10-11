@@ -44,7 +44,7 @@
     "test:types": "tsc --noEmit --project tsconfig.types.json",
     "example:zod": "node examples/zod.js",
     "example:json-schema": "node examples/json-schema.js",
-    "submodule:update": "git submodule update --remote src/utils.schema"
+    "submodule:update": "git submodule update --init --remote src/utils.schema"
   },
   "license": "MIT",
   "author": {
