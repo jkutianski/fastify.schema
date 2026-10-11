@@ -1,7 +1,5 @@
 import { matchRoute, parseRouteEntries } from './utils.schema/src/index.js';
 
-export { matchRoute };
-
 /**
  * Installs route-based validation hooks on a Fastify instance.
  *

@@ -1,7 +1,7 @@
 import { afterEach, expect, test } from '@jest/globals';
 import Fastify from 'fastify';
-import { createSchemaMiddleware, matchRoute } from '../src/index.js';
-import { parseRouteEntries } from '../src/utils.schema/src/index.js';
+import { createSchemaMiddleware } from '../src/index.js';
+import { matchRoute, parseRouteEntries } from '../src/utils.schema/src/index.js';
 
 const fastifyInstances = [];
 
