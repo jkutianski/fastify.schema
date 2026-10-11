@@ -1,0 +1,3 @@
+[submodule "src/utils.schema"]
+	path = src/utils.schema
+	url = https://github.com/jkutianski/utils.schema.git
