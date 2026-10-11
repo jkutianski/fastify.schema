@@ -14,5 +14,6 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run submodule:update
       - run: npm run test:coverage
       - run: npm run test:types
