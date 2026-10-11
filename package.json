@@ -43,7 +43,8 @@
     "test:coverage": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --coverage",
     "test:types": "tsc --noEmit --project tsconfig.types.json",
     "example:zod": "node examples/zod.js",
-    "example:json-schema": "node examples/json-schema.js"
+    "example:json-schema": "node examples/json-schema.js",
+    "submodule:update": "git submodule update --remote src/utils.schema"
   },
   "license": "MIT",
   "author": {
