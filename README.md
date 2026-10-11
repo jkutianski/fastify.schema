@@ -1,4 +1,4 @@
-# ![fastify.schema](logo.svg) ![License](https://badgen.net/github/license/jkutianski/fastify.schema) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jkutianski/fastify.schema/ci.yml) ![NPM Version](https://badgen.net/npm/v/fastify.schema)
+# [![fastify.schema](logo.svg)](https://github.com/jkutianski/fastify.schema) [![License](https://badgen.net/github/license/jkutianski/fastify.schema)](https://github.com/jkutianski/fastify.schema/blob/main/LICENSE) [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jkutianski/fastify.schema/ci.yml)](https://github.com/jkutianski/fastify.schema/actions) [![NPM Version](https://badgen.net/npm/v/fastify.schema)](https://www.npmjs.com/package/fastify.schema)
 
 Route-based runtime validation hooks for Fastify. Define schemas by HTTP method and path, then validate captured URL parameters, request bodies, and response payloads with Zod, JSON Schema/Ajv, or a custom parser.
 
