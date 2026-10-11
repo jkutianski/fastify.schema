@@ -26,7 +26,7 @@ function createHookHarness() {
 	return { fastify, hooks };
 }
 
-test('re-exports the shared route matcher', () => {
+test('checks the shared route matcher', () => {
 	const schema = { request: 'request-schema' };
 	const routes = parseRouteEntries({
 		'GET /users/:id?view=:view': schema,

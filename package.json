@@ -1,7 +1,7 @@
 {
-  "name": "fastify.schema",
+  "name": "@isomorphic.schema/fastify",
   "version": "1.0.0",
-  "description": "Route-based Fastify hooks for validating request params, bodies, and response payloads with any parser",
+  "description": "Route-based Fastify hooks for validating request params, bodies, and response payloads  with Zod, JSON Schema/Ajv, or any custom parser",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jkutianski/fastify.schema.git"
