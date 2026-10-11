@@ -1,0 +1,88 @@
+{
+  "name": "fastify.schema",
+  "version": "1.0.0",
+  "description": "Route-based Fastify hooks for validating request params, bodies, and response payloads with any parser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkutianski/fastify.schema.git"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "LICENSE",
+    "llms.txt",
+    "README.md",
+    "docs",
+    "examples",
+    "skills",
+    "src"
+  ],
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "route-validation",
+    "runtime-validation",
+    "request-validation",
+    "response-validation",
+    "schema-validation",
+    "zod",
+    "json-schema",
+    "ajv",
+    "middleware",
+    "typescript"
+  ],
+  "scripts": {
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
+    "test:coverage": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --coverage",
+    "test:types": "tsc --noEmit --project tsconfig.types.json",
+    "example:zod": "node examples/zod.js",
+    "example:json-schema": "node examples/json-schema.js"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Juan Pablo Kutianki",
+    "email": "jutianski@gmail.com"
+  },
+  "peerDependencies": {
+    "fastify": "^4.0.0 || ^5.0.0",
+    "@types/node": "^20.0.0 || ^22.0.0 || ^24.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "ajv": "^8.20.0",
+    "@jest/globals": "^30.5.2",
+    "fastify": "^5.0.0",
+    "typescript": "^5.9.3",
+    "zod": "^4.0.0",
+    "jest": "^30.5.2"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/src/utils.schema/test/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/utils.schema/test/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}

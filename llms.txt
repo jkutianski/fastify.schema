@@ -1,0 +1,63 @@
+# fastify.schema
+
+## Overview
+
+`fastify.schema` installs route-based validation hooks on a Fastify instance. It matches routes by HTTP method and URL path, captures path and query parameters, and validates request parameters, bodies, and successful response payloads with an application-supplied parser.
+
+The package does not require a schema library. Fastify is a peer dependency; Zod and Ajv are optional choices for the parser.
+
+## Install
+
+```sh
+npm install fastify.schema fastify
+```
+
+Install a validator separately, for example `npm install zod` or `npm install ajv`.
+
+## Primary API
+
+```js
+createSchemaMiddleware(fastify, { routes, parse })
+```
+
+- `fastify`: Fastify instance on which to register hooks.
+- `routes`: object keyed by `METHOD /path`; each value may define `urlParams`, `request`, and `response` schemas.
+- `parse(schema, data, context)`: synchronous or asynchronous parser. Its returned value replaces parsed URL params, request body, or response payload.
+- Returns the Fastify instance.
+
+## Route matching and execution
+
+- Methods are case-insensitive. Static path segments match exactly; `:name` captures one non-empty path segment.
+- Optional query patterns are supported, for example `GET /users?active=true&id=:id`. Extra query parameters are ignored.
+- Captured path and query values are strings.
+- In `preValidation`, the hooks parse `urlParams` first, then `request`.
+- Parsed URL params are exposed as `request.schemaParams`; parsed request data replaces `request.body`.
+- In `preSerialization`, the response parser handles successful object payloads that Fastify serializes. Error responses with status 400 or higher pass through unchanged.
+- Fastify does not run `preSerialization` for strings, buffers, streams, or `null`.
+- Install hooks and register covered routes in the same Fastify encapsulation scope.
+- Parser errors enter Fastify's normal error-handling lifecycle. Unmatched requests are unchanged.
+
+The parser context includes `phase` (`'urlParams'`, `'request'`, or `'response'`), `request`, `reply`, and `params`. Use a coercing schema such as `z.coerce.number()` when transforming string-valued URL parameters.
+
+## Documentation and source
+
+- [README](README.md) — installation, usage, hooks, route matching, and API.
+- [Agent guide](docs/agent-guide.md) — hook flow, parser contract, encapsulation, and development guidance.
+- [fastify.schema skill](skills/fastify-schema/SKILL.md) — integration and repository-maintenance reference.
+- [Zod example](examples/zod.js) — Fastify app exercised with `inject()`.
+- [JSON Schema/Ajv example](examples/json-schema.js) — Fastify app using Ajv.
+- [TypeScript example](examples/typescript_zod.ts) — declarations and parser context types.
+- [Implementation](src/index.js) — route matching and hook behavior.
+- [Type declarations](src/index.d.ts) — public TypeScript API.
+- [Tests](test/index.test.js) — Jest unit and Fastify integration tests.
+- [Package metadata](package.json) — exports, dependencies, scripts, and coverage thresholds.
+
+## Validation
+
+```sh
+npm test
+npm run test:coverage
+npm run test:types
+npm run example:zod
+npm run example:json-schema
+```

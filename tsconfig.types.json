@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "strict": true,
+    "target": "ES2022",
+    "skipLibCheck": false
+  },
+  "include": [
+    "examples/typescript_zod.ts",
+    "test/types.ts"
+  ]
+}
